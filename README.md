@@ -1,21 +1,11 @@
-# 401 JS --  Lab 37 Full-Stack Auth
+# Authorization - Redux
+**Author**: Sarah Bixler  
+**Version**: 1.0.0  
 
-## Submission Instructions
-  * Work in a fork of this repository
-  * Work in a branch on your fork
-  * Submit a pull request to this repository
-  * Submit a link to your pull request on canvas
-  * Submit a question, observation, and how long you spent on canvas  
+##Overview
+This app uses [React](https://reactjs.org/) and [Redux](https://redux.js.org/) to create the front end routes and UI for a backend database that stores users profiles using [MongoDB](https://www.mongodb.com/)
 
-## Configuration  
-#### backend/
-* Copy your mid-project into this directory
-  * Remove the .git folder from the backend project directory before committing
-  
-#### frontend/
-* Develop your entire front-end under this folder
- 
-## Feature Tasks 
+#### Feature Tasks
 * Implement Login/Signup functionality for your mid-term project.
 * Use react/redux best practices
 * Add reporter and thunk middleware to your redux store
@@ -37,6 +27,3 @@ Provider
 * Manage the frontend routes based on the clients authorization
   * If the user is not logged in they should be forced to remain on the landing route(s)
   * If the user is logged in they should not permitted to remain on the landing route(s)
-
-##  Documentation  
-Write a description of the project in your README.md
