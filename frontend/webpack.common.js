@@ -22,7 +22,7 @@ webpackConfig.output = {
 // to write the html
 webpackConfig.plugins = [
   new HTMLWebpackPlugin({
-    title: 'ASYNC Code Demo', // title is not required, its optional 
+    title: 'ASYNC NightMare', // title is not required, its optional 
   }),
   new DefinePlugin({
     API_URL: JSON.stringify(process.env.API_URL),

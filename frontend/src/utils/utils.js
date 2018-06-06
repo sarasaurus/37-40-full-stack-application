@@ -9,15 +9,13 @@ export default function autoBind(classComponent) {
   });
 }
 
-export const validateTree = (payload) => {
+export const validateUser = (payload) => {
   if (!payload._id) {
-    throw new Error('VALIDATION ERROR: Tree must exist');
-  }
-  else if (!payload.name) {
-    throw new Error('VALIDATION ERROR: Tree must have a name');
-  }
-  else if (!payload.city) {
-    throw new Error('VALIDATION ERROR: Tree must have a city');
+    throw new Error('VALIDATION ERROR: User must exist');
+  } else if (!payload.name) {
+    throw new Error('VALIDATION ERROR: User must have a name');
+  } else if (!payload.token) {
+    throw new Error('VALIDATION ERROR: User must have a token');
   }
 };
 

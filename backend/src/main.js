@@ -1,5 +1,3 @@
 'use strict';
 
-import { startServer } from './lib/server';
-
-startServer();
+require('./lib/server').startServer();

@@ -1,6 +1,7 @@
 'use strict';
 
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import logger from './logger';
 import errorMiddleWare from './error-middleware';
@@ -8,12 +9,16 @@ import authRouter from '../route/auth-router';
 import profileRouter from '../route/profile-route';
 import assetRouter from '../route/asset-router';
 
+
 const app = express();
 let server = null;
 
+app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
 app.use(authRouter);
 app.use(profileRouter);
 app.use(assetRouter);
+
+//app.use(cors); 
 
 app.all('*', (request, response) => {
   logger.log(logger.INFO, 'Returning a 404 from the catch-all/default route');

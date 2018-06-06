@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import routes from '../../utils/routes';
+import { LOGIN_ROUTE, DASHBOARD_ROUTE, SIGNUP_ROUTE, ROOT_ROUTE } from '../../utils/routes';
 
 /* 
 *This file will do 3 things:
@@ -27,14 +27,14 @@ class AuthRedirect extends React.Component {
     const { pathname } = location; // location has a property called pathname, here we destructure, it has actual path string
     let destinationRoute = null;
 
-    if (pathname === routes.LOGIN_ROUTE || pathname === routes.SIGNUP_ROUTE || pathname === routes.ROOT_ROUTE) {
+    if (pathname === LOGIN_ROUTE || pathname === SIGNUP_ROUTE || pathname === ROOT_ROUTE) {
       // i only want someone who is loggin in to see dashboard
       if (token) {
-        destinationRoute = routes.DASHBOARD_ROUTE;
+        destinationRoute = DASHBOARD_ROUTE;
       } // if user is logged in we redirect hem to the dashboard
     } else if (!token) {
       // happens with everyother route && if user not logged in
-      destinationRoute = routes.ROOT_ROUTE;
+      destinationRoute = ROOT_ROUTE;
     }
     // here we have 3 cases, dashboard, root or null -- ie we're logged in, so no need to redirect
 

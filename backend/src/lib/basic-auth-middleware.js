@@ -15,20 +15,24 @@ export default (request, response, next) => {
     return next(new HttpError(400, 'AUTH BASIC - header no slplit invalid request'));
   }
   const stringAuthHeader = Buffer.from(base64AuthHeader, 'base64').toString();
+  console.log('STRINGAUTH HEADER', stringAuthHeader);
   // stringAuthHeader should now look like username:password
   const [username, password] = stringAuthHeader.split(':'); // this is ES6 syntax saying assign 0 and 1 index of array to 0,1 index of const []... this is array destructuring!
   if (!username || !password) {
     return next(new Error(400, 'AUTH BASIC - no user or password invalid request'));
   }
+  console.log('WTF BASIC AUTH BFORE DB', username);
   // now have username and password, so now need to find account and login
   return Account.findOne({ username })
     .then((account) => {
+      console.log('WTF BASIC AUTH FIRST', account);
       if (!account) {
         return next(new HttpError(404, 'no such account'))// if want to be vague tho can send 400, cause we sneaky in passwords)
       }
       return account.pVerifyPassword(password);
     })
     .then((account) => {
+      console.log('WTF BASIC AUTH SECOND', account);
       request.account = account; // <-- mutating the request object and adding an account property to it, so now can acess
       return next(); // moving down the middle ware chain
     })
