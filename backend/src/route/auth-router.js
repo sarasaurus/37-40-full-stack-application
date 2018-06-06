@@ -22,6 +22,7 @@ authRouter.post('/signup', jsonParser, (request, response, next) => {
     })
     .then((token) => {
       logger.log(logger.INFO, 'AUTH - returning a 200 code and a token');
+      response.cookie('X-Auth-Token', token, { maxAge: 900000 });
       return response.json({ token });
     })
     .catch(next);

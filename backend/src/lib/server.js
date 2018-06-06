@@ -13,7 +13,7 @@ import assetRouter from '../route/asset-router';
 const app = express();
 let server = null;
 
-// app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
+app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
 app.use(authRouter);
 app.use(profileRouter);
 app.use(assetRouter);
