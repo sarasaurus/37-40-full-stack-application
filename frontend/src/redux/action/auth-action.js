@@ -1,5 +1,7 @@
 import superagent from 'superagent';
-import * as routes from '../../utils/routes';
+import * as routes from '../../routes';
+import { deleteCookie } from '../../utils/cookie';
+import TOKEN_COOKIE_KEY from '../../constants';
 
 // SYNC
 export const setTokenAction = token => ({
@@ -10,6 +12,13 @@ export const setTokenAction = token => ({
 export const removeTokenAction = () => ({
   type: 'TOKEN_REMOVE',
 });
+
+
+export const logoutFunction = () => {
+  // remove cookie and token from store-- remove all copies of token-- think did you set to local storage--- can get complex if there are many places you are storing
+  deleteCookie(TOKEN_COOKIE_KEY);
+  return removeTokenAction();
+};
 
 
 // ASYNC
@@ -33,4 +42,5 @@ export const loginRequest = user => (store) => {
       return store.dispatch(setTokenAction(response.text));
     });
 };
-// think about how to distinguish syncronous from asyncronous actions using naming conventions
+// export const logoutRequest = 
+// // think about how to distinguish syncronous from asyncronous actions using naming conventions

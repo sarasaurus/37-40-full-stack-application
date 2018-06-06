@@ -1,10 +1,10 @@
 import { fetchCookie } from '../../utils/cookie';
+import TOKEN_COOKIE_KEY from '../../constants';
 
-const initialState = null;
+const token = fetchCookie(TOKEN_COOKIE_KEY); // could also import from global variables
+// this basically helps your editor help you-- if you misstype a variable you get a linter errpr
 
-// TODO: need to create the cookie! -- in back end
-// document.cookie = 'ppkcookie1=testcookie; expires=Thu, 2 Aug 2001 20:47:11 UTC; path=/'
-const token = fetchCookie('name of the cookie you want');
+const initialState = token || null;
 
 export default (state = initialState, action) => {
 
