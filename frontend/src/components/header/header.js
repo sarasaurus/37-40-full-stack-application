@@ -16,14 +16,14 @@ class Header extends React.Component {
   render () {
     const JSXNotLoggedIn = 
     <ul>
-      <li><Link to={routes.ROOT_ROUTE}/> Home </li>
-      <li><Link to={routes.LOGIN_ROUTE}/> Login </li>
-      <li><Link to={routes.SIGNUP_ROUTE}/> Sign Up </li>
+      <li><Link to={routes.ROOT_ROUTE}> Home </Link></li>
+      <li><Link to={routes.LOGIN_ROUTE}> Login </Link></li>
+      <li><Link to={routes.SIGNUP_ROUTE}> Sign Up </Link></li>
     </ul>;
     const JSXLoggedIn = 
     <ul>
-    <li><Link to={routes.DASHBOARD_ROUTE}/> Dashboard </li>
-    <li><Link to={routes.PROFILE_ROUTE}/> Profile </li>
+    <li><Link to={routes.DASHBOARD_ROUTE}> Dashboard </Link></li>
+    <li><Link to={routes.PROFILE_ROUTE}> Profile </Link></li>
   </ul>;
 
     return (
