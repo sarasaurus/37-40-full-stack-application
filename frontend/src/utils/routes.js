@@ -1,3 +1,4 @@
-export const LOGIN_ROUTE =
-export const blah blah LOGIN_ROUTE
-// vinicio likes this file to protect again route typos
+export const LOGIN_ROUTE = '/login';
+export const SIGNUP_ROUTE = '/signup';
+export const ROOT_ROUTE = '/';
+export const DASHBOARD_ROUTE = '/dashboard';

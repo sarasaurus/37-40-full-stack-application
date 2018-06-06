@@ -1,5 +1,5 @@
 export default store => next => (action) => { // can also do parentheses
-  typeof action === 'function'
+  return typeof action === 'function'
     ? action(store)// we likely will not use this second state argument can take it out -- here vinicio has changed to just sthe store, now whoever calls this must do handling on their side-- look at judy's call to see-- its considered bad practice to send an argument a funciton wont use-- so we always need store, maybe not state etc
     : next(action);
 };

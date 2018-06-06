@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import session from './components/lib/redux-session';
 import reporter from './components/lib/redux-reporter';
 import App from '../src/components/app/app';
-import rootReducer from './components/redux/reducer/main-reducer';
+import rootReducer from './redux/reducer/main-reducer';
 import thunk from './components/lib/redux-thunk';
 
 import '../styles/main.scss';
