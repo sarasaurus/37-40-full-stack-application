@@ -1,5 +1,6 @@
 const deleteCookie = (key) => {
-  document.cookie = `${key}=; expires= Thu, 01 Jan 1970 00:00:00 GMT`;
+  const cookieDeath = document.cookie = `${key}=; expires= Thu, 01 Jan 1970 00:00:00 GMT`;
+  return cookieDeath;
 };
 const fetchCookie = (key) => {
   const allCookies = document.cookie.split(';');
@@ -13,6 +14,7 @@ const fetchCookie = (key) => {
       return cookieValue;
     }
   }
+  console.log('FETCH COOKIE', allCookies);
   return null;
 };
 

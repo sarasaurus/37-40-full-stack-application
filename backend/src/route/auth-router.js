@@ -27,6 +27,7 @@ authRouter.post('/signup', jsonParser, (request, response, next) => {
     })
     .catch(next);
 });
+
 authRouter.get('/login', basicAuthMiddleware, (request, response, next) => {
   if (!request.account) {
     return next(new HttpError(404, 'AUTH - no resource, now in auth-router'));
@@ -35,6 +36,7 @@ authRouter.get('/login', basicAuthMiddleware, (request, response, next) => {
   return request.account.pCreateToken()
     .then((token) => {
       logger.log(logger.INFO, 'LOGIN - AuthRouter responding with a 200 status and a Token');
+      response.cookie('X-Auth-Token', token, { maxAge: 900000 });
       return response.json({ token });
     })
     .catch(next);

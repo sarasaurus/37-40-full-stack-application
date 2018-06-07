@@ -4,3 +4,4 @@
 export const WELCOME = 'Welcome to our App';
 
 export const LOGIN = 'Login to see stuff';
+export const PROFILE = 'profile page under construction';
