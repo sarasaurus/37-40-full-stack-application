@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { LOGIN_ROUTE, DASHBOARD_ROUTE, SIGNUP_ROUTE, ROOT_ROUTE } from '../../utils/routes';
+import { LOGIN_ROUTE, DASHBOARD_ROUTE, SIGNUP_ROUTE, ROOT_ROUTE } from '../../routes';
 
 /* 
 *This file will do 3 things:

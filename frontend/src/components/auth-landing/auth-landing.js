@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import * as authActions from '../../redux/action/auth-action';
 import autoBind from '../../utils/utils';
 import AuthForm from '../auth-form/auth-form';
-import * as routes from '../../utils/routes';
+import * as routes from '../../routes';
 
 class AuthLanding extends React.Component {
   constructor(props) {
