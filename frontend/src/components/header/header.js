@@ -13,6 +13,7 @@ import * as routes from '../../routes';
 
 
 class Header extends React.Component {
+
   render () {
     const JSXNotLoggedIn = 
     <ul>
