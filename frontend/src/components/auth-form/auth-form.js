@@ -98,7 +98,6 @@ class AuthForm extends React.Component {
     </div>;
 
     const signupRenderJSX = (type !== 'login') ? signupJSX : undefined;
-    // TODO: add property re no html validation
     return (
     <form className='auth-form' onSubmit={this.handleSubmit} >
           

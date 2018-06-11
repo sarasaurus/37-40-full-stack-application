@@ -12,6 +12,8 @@ const jsonParser = bodyParser.json();
 const profileRouter = new Router();
 
 profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, response, next) => {
+  console.log('REQUEST ACCOUNT: ', request.account);
+  console.log('REQUEST PROFILE: ', request.body);
   if (!request.account) {
     return next(new HttpError(401, 'AUTH  in POST- profile route invalid req!'));
   }
@@ -24,7 +26,7 @@ profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, resp
       logger.log(logger.INFO, '200 from new Profile created!');
       return response.json(profile);
     })
-    .catch(next);
+    .catch(err => console.log('WTFFFFFIMPROFILE,', err));
 });
 
 profileRouter.get('/profiles/:id', (request, response, next) => {
