@@ -27,41 +27,41 @@ profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, resp
     });
   // .catch(err => console.log('ERROR IN PROFILE,', err));
 });
-profileRouter.get('/profiles/me', bearerAuthMiddleware, (request, response, next) => {
+// profileRouter.get('/profiles/me', bearerAuthMiddleware, (request, response, next) => {
+//   console.log('REQUEST IN PUT', request.body);
+//   Profile.findOne({ profile: request.body._id })
+//     .then((profile) => {
+//       if (!profile) { 
+//         return next(new HttpError(404, 'NOT FOUND ERROR: profile not found'));
+//       }
+//       return response.json(profile);
+//     })
+//     .catch(next);
+// });
+profileRouter.put('/profiles/:id', bearerAuthMiddleware, jsonParser, (request, response, next) => {
   console.log('REQUEST IN PUT', request.body);
-  Profile.findOne({ profile: request.body._id })
-    .then((profile) => {
-      if (!profile) { 
-        return next(new HttpError(404, 'NOT FOUND ERROR: profile not found'))
-      }
-      return response.json(profile);
-    })
-    .catch(next);
-});
-profileRouter.put('/profiles/me', bearerAuthMiddleware, jsonParser, (request, response, next) => {
-  console.log('REQUEST IN PUT', request.body);
-  Profile.findByIdAndUpdate(request.body._id, { bio: request.body.bio })
+  Profile.findByIdAndUpdate(request.body._id, request.body, { new: true })
     .then((profile) => {
       if (!profile) {
         return next(new HttpError(400, 'AUTH  in PUT- profile route invalid req!'));
       }
-      logger.log(logger.INFO, '200 in profile, PUT route!');
-      return response.json(profile);
+      logger.log(logger.INFO, `200 in profile, PUT route! RESPONSE ${profile}`);
+      return profile;
     })
     .catch(next);
 });
 
 profileRouter.get('/profiles/:id', (request, response, next) => {
-  if (!request.params.id) {
+  if (!request.body._id) {
     return next(new HttpError(400, 'AUTH in GET - no id!'));
   }
-  return Profile.findById(request.params.id)
+  return Profile.findById(request.body._id)
     .then((profile) => {
       if (!profile) {
         return next(new HttpError(400, 'AUTH  in GET- profile route invalid req!'));
       }
       logger.log(logger.INFO, '200 in profile, GET route!');
-      return response.json(profile);
+      return profile;
     })
     .catch(next);
 });

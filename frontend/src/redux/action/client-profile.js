@@ -29,13 +29,13 @@ const updateRequest = profile => (store) => {
   const { token } = store.getState();
   const parsedToken = JSON.parse(token);
   console.log('PROFILE IN UPDATE', profile);
-  return superagent.put(`${API_URL}${routes.PROFILE_ROUTE}/me`)
+  return superagent.put(`${API_URL}${routes.PROFILE_ROUTE}/${profile._id}`)
     .set('Authorization', `Bearer ${parsedToken.token}`) // this is an http header we use it in our backend to verify the token
     .set('Content-Type', 'application/json')
     .send(profile)
     .then((response) => {
       console.log('__SET PROFILE RESPONSE___', response);
-      return store.dispatch(setProfile(response.body)); // 
+      return store.dispatch(setProfile(response)); // 
     });
 };
 const fetchRequest = profile => (store) => {
@@ -45,7 +45,7 @@ const fetchRequest = profile => (store) => {
     .set('Authorization', `Bearer ${parsedToken.token}`) 
     .then((response) => {
       console.log('__SET PROFILE RESPONSE___', response);
-      return store.dispatch(setProfile(response.body)); // 
+      return store.dispatch(setProfile(response)); // 
     });
 };
 

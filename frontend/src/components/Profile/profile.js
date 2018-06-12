@@ -47,7 +47,7 @@ class Profile extends React.Component {
   // -------------------------------------------------------------
   render() {
     const { profile } = this.props;
-    console.log('PRFile,', profile);
+    console.log('profile in Profile component,', profile);
 
     let JSXEditing = null;
     let JSXDisplay = null;
