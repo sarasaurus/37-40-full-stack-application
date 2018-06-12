@@ -45,8 +45,8 @@ profileRouter.put('/profiles/:id', bearerAuthMiddleware, jsonParser, (request, r
       if (!profile) {
         return next(new HttpError(400, 'AUTH  in PUT- profile route invalid req!'));
       }
-      logger.log(logger.INFO, `200 in profile, PUT route! RESPONSE ${profile}`);
-      return profile;
+      logger.log(logger.INFO, `200 in profile, PUT route! RESPONSE ${response.profile}`);
+      return response.profile;
     })
     .catch(next);
 });

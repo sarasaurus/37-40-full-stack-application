@@ -19,7 +19,7 @@ const createRequest = profile => (store) => {
     .set('Content-Type', 'application/json')
     .send(profile)
     .then((response) => {
-      console.log('__SET PROFILE RESPONSE___', response);
+      console.log('__POST PROFILE RESPONSE___', response);
       return store.dispatch(setProfile(response.body)); // if we no do this app will hang or do nothing!
       // response.whatever you api will return!
     })
@@ -34,7 +34,7 @@ const updateRequest = profile => (store) => {
     .set('Content-Type', 'application/json')
     .send(profile)
     .then((response) => {
-      console.log('__SET PROFILE RESPONSE___', response);
+      console.log('__PUT PROFILE RESPONSE___', response);
       return store.dispatch(setProfile(response)); // 
     });
 };
@@ -44,7 +44,7 @@ const fetchRequest = profile => (store) => {
   return superagent.get(`${API_URL}${routes.PROFILE_ROUTE}/me`)
     .set('Authorization', `Bearer ${parsedToken.token}`) 
     .then((response) => {
-      console.log('__SET PROFILE RESPONSE___', response);
+      console.log('__GET PROFILE RESPONSE___', response);
       return store.dispatch(setProfile(response)); // 
     });
 };
