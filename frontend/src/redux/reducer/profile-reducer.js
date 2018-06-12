@@ -8,9 +8,14 @@ const validateProfile = (profile) => {
     throw new Error('No Profile!');
     // this is a developer message if want to show to a user, you'd needa try catch block that interacted with UI
   }
-
-  const { username, email, bio, owner } = profile;
-  if (!username || !email || !bio || !owner) {
+  
+  const { bio, account, _id } = profile;
+  // if (!username || !email || !bio || !owner) {
+  //   console.log(profile, 'WHATS THIS');
+  //   throw new Error('Invalid Profile');
+  // }
+  if (!bio || !account || !_id) {
+    console.log(profile, 'WHATS THIS');
     throw new Error('Invalid Profile');
   }
   return undefined;

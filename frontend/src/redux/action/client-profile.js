@@ -12,10 +12,10 @@ const setProfile = profile => ({
 
 const createRequest = profile => (store) => {
   const { token } = store.getState(); // can only do because know we have token saved!
-  // somehow need to find the account first
-  console.log('TOKEN IN CREATE', token);
+  const parsedToken = JSON.parse(token);
+  console.log('TOKEN IN CREATE', parsedToken.token);
   return superagent.post(`${API_URL}${routes.PROFILE_ROUTE}`)
-    .set('Authorization', `Bearer ${token}`) // this is an http header we use it in our backend to verify the token
+    .set('Authorization', `Bearer ${parsedToken.token}`) // this is an http header we use it in our backend to verify the token
     .set('Content-Type', 'application/json')
     .send(profile)
     .then((response) => {
@@ -27,7 +27,7 @@ const createRequest = profile => (store) => {
 };
 const updateRequest = profile => (store) => {
   const { token } = store.getState();
-
+  console.log('PROFILE IN UPDATE', profile);
   return superagent.put(`${API_URL}${routes.PROFILE_ROUTE}/${profile._id}`)
     .set('Authorization', `Bearer ${token}`) // this is an http header we use it in our backend to verify the token
     .set('Content-Type', 'application/json')

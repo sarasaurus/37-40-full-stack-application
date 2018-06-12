@@ -47,6 +47,7 @@ class Profile extends React.Component {
   // -------------------------------------------------------------
   render() {
     const { profile } = this.props;
+    console.log('PRFile,', profile);
 
     let JSXEditing = null;
     let JSXDisplay = null;
@@ -91,7 +92,7 @@ Profile.propTypes = {
 
 // history is a special object 
 const mapStateToProps = state => ({
-  profile: state.clientProfile,
+  profile: state.profile,
 });
 const mapDispatchToProps = dispatch => ({
   profileCreate: profile => dispatch(clientProfileActions.createRequest(profile)),

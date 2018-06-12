@@ -13,6 +13,7 @@ class ProfileForm extends React.Component {
 
     this.state = props.profile ? props.profile : emptyState;
     autoBind.call(this, ProfileForm);
+    console.log('PROPS IN FORM', this.props.profile);
   }
 
   // TODO: handleChange, handleSubmit

@@ -12,7 +12,7 @@ const jsonParser = bodyParser.json();
 const profileRouter = new Router();
 
 profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, response, next) => {
-  console.log('REQUEST ACCOUNT: ', request.account);
+  console.log('REQUEST: ', request);
   console.log('REQUEST PROFILE: ', request.body);
   if (!request.account) {
     return next(new HttpError(401, 'AUTH  in POST- profile route invalid req!'));
@@ -25,8 +25,31 @@ profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, resp
     .then((profile) => {
       logger.log(logger.INFO, '200 from new Profile created!');
       return response.json(profile);
+    });
+    // .catch(err => console.log('ERROR IN PROFILE,', err));
+});
+// profileRouter.get('/profiles/me', bearerAuthMiddleware, (req, res, next) => {
+//   Profile.findOne({profile: req.user._id})
+//   .then(profile => {
+//     if(!profile)
+//       return next(createError(404, 'NOT FOUND ERROR: profile not found'))
+//     res.json(profile)
+//   })
+//   .catch(next)
+// })
+profileRouter.put('/profiles/:id', bearerAuthMiddleware, jsonParser, (request, response, next) => {
+  if (!request.params.id) {
+    return next(new HttpError(400, 'AUTH in GET - no id!'));
+  }
+  return Profile.findByIdAndUpdate(request.params.id, request.body)
+    .then((profile) => {
+      if (!profile) {
+        return next(new HttpError(400, 'AUTH  in PUT- profile route invalid req!'));
+      }
+      logger.log(logger.INFO, '200 in profile, PUT route!');
+      return response.json(profile);
     })
-    .catch(err => console.log('WTFFFFFIMPROFILE,', err));
+    .catch(next);
 });
 
 profileRouter.get('/profiles/:id', (request, response, next) => {
