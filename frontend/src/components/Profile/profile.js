@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { PROFILE } from '../../text';
+// import { PROFILE } from '../../text';
 import ProfileForm from '../profile-form/profile-form';
 import autoBind from '../../utils/utils';
 import * as clientProfileActions from '../../redux/action/client-profile';
 import * as routes from '../../routes';
+
 
 
 class Profile extends React.Component {
