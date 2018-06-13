@@ -13,7 +13,31 @@ import bearerAuthMiddleware from '../lib/bearer-auth-middleware';
 const multerUpload = multer({ dest: `${__dirname}/../temp` });
 const assetRouter = new Router();
 
-assetRouter.post('/assets', bearerAuthMiddleware, multerUpload.any(), (request, response, next) => {
+// assetRouter.post('/assets', bearerAuthMiddleware, multerUpload.any(), (request, response, next) => {
+//   if (!request.account) {
+//     return next(new HttpError(404, 'ASSET ROUTER ERROR: asset not found, no account! '));
+//   }
+//   if (!request.body.title || request.files.length > 1 || request.files[0].fieldname !== 'asset') {
+//     return next(new HttpError(400, 'ASSET ROUTER ERROR: invalid request'));
+//   }
+//   const [file] = request.files;
+//   const key = `${file.filename}.${file.originalname}`;
+
+//   return s3Upload(file.path, key)
+//     .then((url) => {
+//       return new Asset({
+//         title: request.body.title,
+//         account: request.account._id,
+//         url,
+//       }).save()
+//         .then(asset => response.json(asset))
+//         .catch((err) => {
+//           return next;
+//         });
+//     });
+// });
+assetRouter.post('/assets', bearerAuthMiddleware, (request, response, next) => {
+  console.log('REQUEST ASSET', request);
   if (!request.account) {
     return next(new HttpError(404, 'ASSET ROUTER ERROR: asset not found, no account! '));
   }

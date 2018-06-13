@@ -16,12 +16,13 @@ const create = picture => ({
 // ASYNC
 
 const createRequest = picture => (store) => {
+  console.log('_PICTURE_ACTION_', picture);
   const { token } = store.getState();
   const parsedToken = JSON.parse(token);
   return superagent.post(`${API_URL}${routes.PHOTOS_ROUTE}`)
     .set('Authorization', `Bearer ${parsedToken.token}`)
     .field('description', picture.description)
-    .attach('photo', picture.photo)
+    .attach('photo', picture.picture)
     .then((response) => {
       return store.dispatch(set(response));
     });
