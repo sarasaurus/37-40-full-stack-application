@@ -13,7 +13,9 @@ import * as clientProfileActions from '../../redux/action/client-profile';
 
 class App extends React.Component {
   componentDidMount() {
+    console.log('IN COMPONENT DID MOUNT IN APP');
     if (this.props.loggedIn) {
+      console.log('INSIDE IF< LOGGIN');
       this.props.pFetchClientProfile()
         .catch(console.error);
     }
@@ -21,6 +23,9 @@ class App extends React.Component {
   render() {
     return (
 <div className="app">
+<div className='oath'>
+poooooppp
+      </div>
 <BrowserRouter>
 <div>
     <Header />
@@ -32,6 +37,7 @@ class App extends React.Component {
     <Route exact path='/profiles' component={ Profile } />
   </div>
 </BrowserRouter>
+
   
 </div>
     );
@@ -43,7 +49,7 @@ App.propTypes = {
   pFetchClientProfile: PropTypes.func,
 };
 const mapStateToProps = state => ({
-  loggendIn: !!state.token,
+  loggedIn: !!state.token,
 
 });
 const mapDispatchToProps = dispatch => ({

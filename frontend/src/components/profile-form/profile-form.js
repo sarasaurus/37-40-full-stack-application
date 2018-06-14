@@ -16,8 +16,6 @@ class ProfileForm extends React.Component {
     console.log('PROPS IN FORM', this.props.profile);
   }
 
-  // TODO: handleChange, handleSubmit
-
   handleChange(e) {
     const { value } = e.target;
     this.setState({

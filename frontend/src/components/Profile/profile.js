@@ -7,8 +7,6 @@ import autoBind from '../../utils/utils';
 import * as clientProfileActions from '../../redux/action/client-profile';
 import * as routes from '../../routes';
 
-
-
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +17,15 @@ class Profile extends React.Component {
 
     autoBind.call(this, Profile);
   }
+  // componentDidMount() {
+  //   this.props.profileFetch();
+  // }
 
+  // componentDidUpdate(prevProps) {
+  //   if(prevProps !== ) {
+  //     this.props.profileFetch();
+  //   }
+  // }
   // -------------------------------------------------------------
   // member functions
   // -------------------------------------------------------------
@@ -31,15 +37,15 @@ class Profile extends React.Component {
       });
   }
   handleUpdate(profile) {
-    this.props.profileUpdate(profile);
+    console.log('UPDATE PROFILE CALLED');
+    this.props.profileUpdate(profile)
+      .then(() => {
+        this.props.history.push(routes.DASHBOARD_ROUTE);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     this.setState({ editing: false }); 
-    // .then(() => {
-    //   // this profile has been created, so now can do whatever you wnat with it!
-    //   this.props.history.push(routes.DASHBOARD_ROUTE);
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // })
   }
 
 
@@ -73,7 +79,7 @@ class Profile extends React.Component {
         {this.state.editing ? JSXEditing : JSXDisplay}
       </div>;
     }
-    // TODO: check line 80 not pasing in the right props i think
+   
     return (
       <div className='profile'>
       <h1>PROFILE</h1>
@@ -98,7 +104,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   profileCreate: profile => dispatch(clientProfileActions.createRequest(profile)),
   profileUpdate: profile => dispatch(clientProfileActions.updateRequest(profile)),
-  profileFetch: profile => dispatch(clientProfileActions.fetchRequest(profile)),
+  profileFetch: () => dispatch(clientProfileActions.fetchRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

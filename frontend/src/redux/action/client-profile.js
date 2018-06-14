@@ -8,6 +8,11 @@ const setProfile = profile => ({
   payload: profile,
 });
 
+const updateProfile = profile => ({
+  type: 'UPDATE_PROFILE',
+  payload: profile,
+});
+
 // async
 
 const createRequest = profile => (store) => {
@@ -21,7 +26,7 @@ const createRequest = profile => (store) => {
     .then((response) => {
       console.log('__POST PROFILE RESPONSE___', response);
       return store.dispatch(setProfile(response.body)); // if we no do this app will hang or do nothing!
-      // response.whatever you api will return!
+      // response.whatever your api will return!
     })
     .catch(err => console.log('POST ERROR', err));
 };
@@ -34,19 +39,23 @@ const updateRequest = profile => (store) => {
     .set('Content-Type', 'application/json')
     .send(profile)
     .then((response) => {
-      console.log('__PUT PROFILE RESPONSE___', response);
-      return store.dispatch(setProfile(response)); // 
-    });
+      //const responseProfile = JSON.parse(response);
+      // console.log('__PUT PROFILE RESPONSE___', responseProfile);
+      return store.dispatch(updateProfile(response.body)); // 
+    })
+    .catch(err => console.log('PUT ERROR', err));
 };
-const fetchRequest = profile => (store) => {
+const fetchRequest = () => (store) => {
   const { token } = store.getState(); 
   const parsedToken = JSON.parse(token);
   return superagent.get(`${API_URL}${routes.PROFILE_ROUTE}/me`)
     .set('Authorization', `Bearer ${parsedToken.token}`) 
     .then((response) => {
-      console.log('__GET PROFILE RESPONSE___', response);
-      return store.dispatch(setProfile(response)); // 
-    });
+      const profile = JSON.parse(response.text);
+      console.log('__GET PROFILE RESPONSE___', profile);
+      return store.dispatch(setProfile(profile)); // 
+    })
+    .catch(err => console.log('GET ERROR', err));
 };
 
 export { setProfile, createRequest, updateRequest, fetchRequest };

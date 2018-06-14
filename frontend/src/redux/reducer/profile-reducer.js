@@ -1,7 +1,7 @@
 // a reducer takes the previous state and updates it to a new state, using an action, think state.reduce(action => action)
 // const initialState = profile || null;
 // oftern thrown erros are just codes, that mean somehting to the development team, but not to the outsde eg D23_B01, D23_F01 or whatever
-// const initialState = null;
+const initialState = null;
 
 const validateProfile = (profile) => {
   if (!profile) {
@@ -10,10 +10,6 @@ const validateProfile = (profile) => {
   }
   
   const { bio, account, _id } = profile;
-  // if (!username || !email || !bio || !owner) {
-  //   console.log(profile, 'WHATS THIS');
-  //   throw new Error('Invalid Profile');
-  // }
   if (!bio || !account || !_id) {
     console.log(profile, 'WHATS THIS');
     throw new Error('Invalid Profile');
@@ -21,12 +17,15 @@ const validateProfile = (profile) => {
   return undefined;
 };
 
-export default (state = null, action) => {
+export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case 'CLIENT_PROFILE_SET':
       validateProfile(payload);
+      console.log(payload, 'PROFILE REDUCER PAYLOAD');
+      return payload;
+    case 'UPDATE_PROFILE':
       return payload;
 
     case 'TOKEN_REMOVE': // this is like logging out, we are revoking access, so we want to know in any component that is dependant on the token
