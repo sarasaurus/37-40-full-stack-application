@@ -55,6 +55,7 @@ webpackConfig.module.rules = [
       },
     },
   },
+  // TODO: FRONT END DEPLOY: you must remove this rule for front end DEPLOYMENT-- move to dev file
   {// mini css plugin turns our styles into a single style sheet that we can link to-- previously we were just injecting styles into each html tag-- major no-no!
     test: /\.scss$/,
     use: [

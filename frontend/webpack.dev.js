@@ -26,5 +26,8 @@ webpackDevConfig.plugins = [
   new HotModuleReplacementPlugin(),
 ];
 
+// front front end deployment
+// add code here 
+
 module.exports = merge(commonConfig, webpackDevConfig);
 
