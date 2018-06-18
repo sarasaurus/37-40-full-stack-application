@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import autoBind from '../../utils/utils';
 
 const emptyState = {
+  firstName: '',
+  lastName: '',
   bio: '',
 };
 
@@ -17,9 +19,9 @@ class ProfileForm extends React.Component {
   }
 
   handleChange(e) {
-    const { value } = e.target;
+    const { name, value } = e.target;
     this.setState({
-      bio: value,
+      [name]: value,
     });
   }
   handleSubmit(e) {
@@ -35,6 +37,16 @@ class ProfileForm extends React.Component {
       <form
         className='profile-form'
         onSubmit={this.handleSubmit}>
+        <input
+          name='firstName'
+          value={this.state.firstName}
+          onChange={this.handleChange}
+        />
+        <input
+          name='lastName'
+          value={this.state.lastName}
+          onChange={this.handleChange}
+        />
         <textarea
           name='bio'
           value={this.state.bio}

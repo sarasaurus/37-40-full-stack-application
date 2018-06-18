@@ -14,6 +14,7 @@ const multerUpload = multer({ dest: `${__dirname}/../temp` });
 const assetRouter = new Router();
 
 assetRouter.post('/assets', bearerAuthMiddleware, multerUpload.any(), (request, response, next) => {
+  // console.log(request.files);
   if (!request.account) {
     return next(new HttpError(404, 'ASSET ROUTER ERROR: asset not found, no account! '));
   }

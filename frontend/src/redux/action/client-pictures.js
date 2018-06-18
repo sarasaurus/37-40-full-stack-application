@@ -23,6 +23,8 @@ const createRequest = picture => (store) => {
     .field('description', picture.description)
     .attach('photo', picture.photo)
     .then((response) => {
-      return store.dispatch(set(response));
+      return store.dispatch(create(response.body));
     });
 };
+
+export { createRequest };

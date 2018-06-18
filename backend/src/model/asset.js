@@ -17,7 +17,6 @@ const assetSchema = mongoose.Schema({
   },
   account: {
     type: mongoose.Schema.Types.ObjectId,
-    // schema.types is just more verboase version of provious version so we thinkg
     required: true,
   },
 });

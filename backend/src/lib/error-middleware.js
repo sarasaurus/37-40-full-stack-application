@@ -7,7 +7,7 @@ export default (error, request, response, next) => {
   logger.log(logger.ERROR, error);
 
   if (error.status) {
-    logger.log(logger.INFO, `Responding with a ${error.status} code and message ${error.message}`);
+    logger.log(logger.INFO, `Responding with a ${error.status} code and message ${error.message}, ${error.body}`);
     return response.sendStatus(error.status);
   }
 

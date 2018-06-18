@@ -39,21 +39,16 @@ const accountSchema = mongoose.Schema({
   },
 });
 function pVerifyPassword(password) {
-  // basically need to run same hash on it
-  // bcrypt method to compare two hashes
-  // important to note we never compare password to old password-- just to password HASH!
   return bcrypt.compare(password, this.passwordHash)
     .then((result) => {
       if (!result) {
         throw new Error('400', 'sneaky sneaky password error AUTH - incorrect data');
-      // error should be 401-- but beause this is password, error is sekret coded
       }
-      return this; // means to return the account
+      return this; 
     });
 }
 
 function pCreateToken() {
-  // ES5 funciton so this is scoped to the request object, not the schema object
   this.tokenSeed = crypto.randomBytes(TOKEN_SEED_LENGTH).toString('hex');
   return this.save()
     .then((account) => {
@@ -81,5 +76,3 @@ Account.create = (username, email, password) => {
 };
 
 export default Account;
-
-// we are linking our tokens to the password, but could create separte tokens for diff users then create bearer-user-auth mmiddleware to handle those diff permisionsß
