@@ -13,9 +13,7 @@ import * as clientProfileActions from '../../redux/action/client-profile';
 
 class App extends React.Component {
   componentDidMount() {
-    console.log('IN COMPONENT DID MOUNT IN APP');
     if (this.props.loggedIn) {
-      console.log('INSIDE IF< LOGGIN');
       this.props.pFetchClientProfile()
         .catch(console.error);
     }

@@ -9,7 +9,7 @@ const set = pictures => ({
 });
 
 const create = picture => ({
-  type: 'CLIENT_PICTURE_CREATE', // NAME_ACTION / ACTION_NAME is a convention, not a requirement
+  type: 'CLIENT_PICTURE_CREATE', 
   payload: picture,
 });
 

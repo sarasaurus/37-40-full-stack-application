@@ -16,17 +16,16 @@ const updateProfile = profile => ({
 // async
 
 const createRequest = profile => (store) => {
-  const { token } = store.getState(); // can only do because know we have token saved!
+  const { token } = store.getState(); 
   const parsedToken = JSON.parse(token);
   console.log('TOKEN IN CREATE', parsedToken.token);
   return superagent.post(`${API_URL}${routes.PROFILE_ROUTE}`)
-    .set('Authorization', `Bearer ${parsedToken.token}`) // this is an http header we use it in our backend to verify the token
+    .set('Authorization', `Bearer ${parsedToken.token}`)
     .set('Content-Type', 'application/json')
     .send(profile)
     .then((response) => {
       console.log('__POST PROFILE RESPONSE___', response);
-      return store.dispatch(setProfile(response.body)); // if we no do this app will hang or do nothing!
-      // response.whatever your api will return!
+      return store.dispatch(setProfile(response.body)); 
     })
     .catch(err => console.log('POST ERROR', err));
 };
@@ -35,12 +34,10 @@ const updateRequest = profile => (store) => {
   const parsedToken = JSON.parse(token);
   console.log('PROFILE IN UPDATE', profile);
   return superagent.put(`${API_URL}${routes.PROFILE_ROUTE}/${profile._id}`)
-    .set('Authorization', `Bearer ${parsedToken.token}`) // this is an http header we use it in our backend to verify the token
+    .set('Authorization', `Bearer ${parsedToken.token}`) 
     .set('Content-Type', 'application/json')
     .send(profile)
     .then((response) => {
-      //const responseProfile = JSON.parse(response);
-      // console.log('__PUT PROFILE RESPONSE___', responseProfile);
       return store.dispatch(updateProfile(response.body)); // 
     })
     .catch(err => console.log('PUT ERROR', err));
@@ -52,7 +49,6 @@ const fetchRequest = () => (store) => {
     .set('Authorization', `Bearer ${parsedToken.token}`) 
     .then((response) => {
       const profile = JSON.parse(response.text);
-      console.log('__GET PROFILE RESPONSE___', profile);
       return store.dispatch(setProfile(profile)); // 
     })
     .catch(err => console.log('GET ERROR', err));

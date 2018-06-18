@@ -20,12 +20,11 @@ export default (state = [], action) => {
   switch (type) {
     case 'CLIENT_PICTURES_SET':
       validatePicture(payload);
-      return [payload, ...state]; // could do ...state, payload
+      return [payload, ...state];
     case 'TOKEN_REMOVE':
-      return []; // removing pcitures from state
+      return [];
     default:
       return state;
   }
 };
 
-// reducer is function that takes a state and action and returns a new state

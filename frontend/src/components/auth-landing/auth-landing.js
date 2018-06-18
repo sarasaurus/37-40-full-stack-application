@@ -19,19 +19,14 @@ class AuthLanding extends React.Component {
   handleLogin(user) {
     this.props.pDoLogin(user)
       .then(() => {
-      // need to redirect to dashboard
         this.props.pDoFetchProfile();
         this.props.history.push(routes.DASHBOARD_ROUTE);
       })
       .catch(console.error);
   }
   handleSignup(user) {
-    // console.log('THIS PROPS AUTH LAND:', this.props);
     this.props.pDoSignup(user)
       .then(() => {
-        console.log('WHAAAT IN THEN BLOCK', user);
-      // need to redirect to dashboard
-      // history is a property of the routes object
         this.props.history.push(routes.DASHBOARD_ROUTE);
       })
       .catch(console.error);
@@ -61,8 +56,7 @@ class AuthLanding extends React.Component {
   </div>;
 
 
-    const { location } = this.props; // move declaration as close as possible to where you are using them
-    // but another school of though says declare in one spot so can see in one glance everything the app will use--- biggest thing is consistency
+    const { location } = this.props; 
     return (
     <div className='landing'>
       { location.pathname === routes.ROOT_ROUTE ? rootJSX : undefined }

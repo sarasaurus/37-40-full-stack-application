@@ -69,7 +69,6 @@ class AuthForm extends React.Component {
       this.props.onComplete(this.state);
       this.setState(emptyState);
     } else {
-      // now all our error messaging will persist
       this.setState({
         usernameDirty: true,
         emailDirty: true,

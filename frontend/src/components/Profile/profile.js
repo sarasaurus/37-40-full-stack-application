@@ -30,14 +30,12 @@ class Profile extends React.Component {
   // member functions
   // -------------------------------------------------------------
   handleCreate(profile) {
-    this.props.profileCreate(profile) // this is from the store!
+    this.props.profileCreate(profile) 
       .then(() => {
-        // this profile has been created, so now can do whatever you wnat with it!
         this.props.history.push(routes.DASHBOARD_ROUTE);
       });
   }
   handleUpdate(profile) {
-    console.log('UPDATE PROFILE CALLED');
     this.props.profileUpdate(profile)
       .then(() => {
         this.props.history.push(routes.DASHBOARD_ROUTE);
@@ -54,7 +52,6 @@ class Profile extends React.Component {
   // -------------------------------------------------------------
   render() {
     const { profile } = this.props;
-    console.log('profile in Profile component,', profile);
 
     let JSXEditing = null;
     let JSXDisplay = null;
@@ -99,7 +96,6 @@ Profile.propTypes = {
   history: PropTypes.object,
 };
 
-// history is a special object 
 const mapStateToProps = state => ({
   profile: state.profile,
 });

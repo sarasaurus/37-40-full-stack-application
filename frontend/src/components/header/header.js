@@ -4,14 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as authActions from '../../redux/action/auth-action';
 import * as routes from '../../routes';
-
-
-// this component needs to connect to the store becasue want to coniditionally render informaiton based on whether the user is logged in, ie the state -- so token ? do one thing : do the other thing
-
-// people can create their own fake tokens and send--- to actually validate, must send a request to the backend
-// ie in front end can only check if token exists.. in backend can check if token is valid
-
-
 class Header extends React.Component {
 
   render () {
@@ -49,7 +41,7 @@ Header.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  loggedIn: !!state.token, // not not there ---ie you want a boolean, if you said state.token-- youd assign, here we are evaluatign the truthiness of the statement
+  loggedIn: !!state.token, 
 });
 
 const mapDispatchToProps = dispatch => ({
