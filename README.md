@@ -1,29 +1,38 @@
-# Authorization - Redux
+# Profile Creation
 **Author**: Sarah Bixler  
 **Version**: 1.0.0  
 
 ##Overview
 This app uses [React](https://reactjs.org/) and [Redux](https://redux.js.org/) to create the front end routes and UI for a backend database that stores users profiles using [MongoDB](https://www.mongodb.com/)
 
-#### Feature Tasks
-* Implement Login/Signup functionality for your mid-term project.
-* Use react/redux best practices
-* Add reporter and thunk middleware to your redux store
-* make async action creators for making ajax requests to your backend
-* make sync action creators for updating your app store
 
-#### Components
+## Getting Started
+- fork the repo
+- install packages in both front and backend folders using `npm i`
+- create a `.env` file in the **frontend** folder
 ```
-Provider
-  App
-    AuthRedirect
-    Landing
-      // handle login and signup
-    Dashboard
-      // display main app
+NODE_ENV = development
+PORT = 3000
+CDN_URL=/
+API_URL=http://localhost:3000
 ```
+- create a `.env` file in the **backend** folder:
+```
+SOUND_CLOUD_SECRET = HynUc0hndJu1i0FjnUM9976KLMXHCffSXDYST9BYGhfIFjFvSJxeMXfRbyblMQpfStx5gXZew3r2YX1kmCay2NNpR2mM4ujzsZoq
+NODE_ENV = development
+PORT = 3000
+MONGODB_URI=mongodb://localhost/nameofdb
+CORS_ORIGIN=http://localhost:8080
+```
+## Architecture
 
-* Implement a Landing route that allows a user to signup and login to the application.
-* Manage the frontend routes based on the clients authorization
-  * If the user is not logged in they should be forced to remain on the landing route(s)
-  * If the user is logged in they should not permitted to remain on the landing route(s)
+[MongoDB](https://www.mongodb.com/) | [Node](https://node.js.org/) 
+[React](https://reactjs.org/) | [Express](https://expressjs.org) 
+[Redux](https://redux.js.org/) | [Webpack](http://www.webpack.com)
+[Jest]() |  [Babel]() 
+[Superagent]() |
+CSS3 with [SASS]()
+[Eslint]() with [AirBnb]() stye guide
+
+## Changelog
+06-17-2018 -- Login component and profile form implemented client side 

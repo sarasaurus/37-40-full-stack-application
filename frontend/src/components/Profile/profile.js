@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { PROFILE } from '../../text';
+// import { PROFILE } from '../../text';
 import ProfileForm from '../profile-form/profile-form';
 import autoBind from '../../utils/utils';
 import * as clientProfileActions from '../../redux/action/client-profile';
 import * as routes from '../../routes';
-
 
 class Profile extends React.Component {
   constructor(props) {
@@ -18,27 +17,33 @@ class Profile extends React.Component {
 
     autoBind.call(this, Profile);
   }
+  // componentDidMount() {
+  //   this.props.profileFetch();
+  // }
 
+  // componentDidUpdate(prevProps) {
+  //   if(prevProps !== ) {
+  //     this.props.profileFetch();
+  //   }
+  // }
   // -------------------------------------------------------------
   // member functions
   // -------------------------------------------------------------
   handleCreate(profile) {
-    this.props.profileCreate(profile) // this is from the store!
+    this.props.profileCreate(profile) 
       .then(() => {
-        // this profile has been created, so now can do whatever you wnat with it!
         this.props.history.push(routes.DASHBOARD_ROUTE);
       });
   }
   handleUpdate(profile) {
-    this.props.profileUpdate(profile);
+    this.props.profileUpdate(profile)
+      .then(() => {
+        this.props.history.push(routes.DASHBOARD_ROUTE);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     this.setState({ editing: false }); 
-    // .then(() => {
-    //   // this profile has been created, so now can do whatever you wnat with it!
-    //   this.props.history.push(routes.DASHBOARD_ROUTE);
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // })
   }
 
 
@@ -47,7 +52,6 @@ class Profile extends React.Component {
   // -------------------------------------------------------------
   render() {
     const { profile } = this.props;
-    console.log('profile in Profile component,', profile);
 
     let JSXEditing = null;
     let JSXDisplay = null;
@@ -62,6 +66,8 @@ class Profile extends React.Component {
       </div>;
       JSXDisplay =
       <div>
+         <p>{profile.firstName}</p>
+         <p>{profile.lastName}</p>
         <p>{profile.bio}</p>
         <button onClick={() => this.setState({ editing: true })}> Edit </button>  
       </div>;
@@ -72,7 +78,7 @@ class Profile extends React.Component {
         {this.state.editing ? JSXEditing : JSXDisplay}
       </div>;
     }
-    // TODO: check line 80 not pasing in the right props i think
+   
     return (
       <div className='profile'>
       <h1>PROFILE</h1>
@@ -90,14 +96,13 @@ Profile.propTypes = {
   history: PropTypes.object,
 };
 
-// history is a special object 
 const mapStateToProps = state => ({
   profile: state.profile,
 });
 const mapDispatchToProps = dispatch => ({
   profileCreate: profile => dispatch(clientProfileActions.createRequest(profile)),
   profileUpdate: profile => dispatch(clientProfileActions.updateRequest(profile)),
-  profileFetch: profile => dispatch(clientProfileActions.fetchRequest(profile)),
+  profileFetch: () => dispatch(clientProfileActions.fetchRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

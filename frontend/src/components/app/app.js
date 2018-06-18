@@ -21,6 +21,9 @@ class App extends React.Component {
   render() {
     return (
 <div className="app">
+<div className='oath'>
+poooooppp
+      </div>
 <BrowserRouter>
 <div>
     <Header />
@@ -32,6 +35,7 @@ class App extends React.Component {
     <Route exact path='/profiles' component={ Profile } />
   </div>
 </BrowserRouter>
+
   
 </div>
     );
@@ -43,7 +47,7 @@ App.propTypes = {
   pFetchClientProfile: PropTypes.func,
 };
 const mapStateToProps = state => ({
-  loggendIn: !!state.token,
+  loggedIn: !!state.token,
 
 });
 const mapDispatchToProps = dispatch => ({

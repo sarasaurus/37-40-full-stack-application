@@ -14,10 +14,6 @@ const app = express();
 let server = null;
 
 app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
-// you can set this to be JUST your own API or just ONE spot-- no need if have one domain, if you have many, then you need to grant access using cors
-
-// app.use(cors); 
-
 app.use(authRouter);
 app.use(profileRouter);
 app.use(assetRouter);

@@ -24,20 +24,16 @@ class AuthRedirect extends React.Component {
  */
   render() {
     const { location, token } = this.props;
-    const { pathname } = location; // location has a property called pathname, here we destructure, it has actual path string
+    const { pathname } = location; 
     let destinationRoute = null;
 
     if (pathname === LOGIN_ROUTE || pathname === SIGNUP_ROUTE || pathname === ROOT_ROUTE) {
-      // i only want someone who is loggin in to see dashboard
       if (token) {
         destinationRoute = DASHBOARD_ROUTE;
-      } // if user is logged in we redirect hem to the dashboard
+      } 
     } else if (!token) {
-      // happens with everyother route && if user not logged in
       destinationRoute = ROOT_ROUTE;
     }
-    // here we have 3 cases, dashboard, root or null -- ie we're logged in, so no need to redirect
-
 
     return (
       <div>
@@ -50,8 +46,6 @@ AuthRedirect.propTypes = {
   token: PropTypes.string,
   location: PropTypes.object,
 };
-
-// location will be the /api/route/string--- the entire location of the 'fake' routes/ front-end routes
 
 const mapStateToProps = state => ({
   token: state.token,

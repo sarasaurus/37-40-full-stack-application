@@ -9,12 +9,7 @@ import Dashboard from '../components/dashboard/dashboard';
 
 // first configure adaptor for enzyme:
 configureEnzyme({ adapter: new Adapter() });
-
-// second write normal describe block test
-// any change to your reducers will afect these tests--- you must TOTALLY accurately mock the state
-
 describe('#Dashboard', () => {
-  // configureStore requires an initial state:--recreate the state in our app
   const testState = {
     categories: 
       [{
