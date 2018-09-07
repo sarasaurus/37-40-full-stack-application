@@ -11,6 +11,8 @@ const fileToBase64String = (file) => {
     
     fileReader.addEventListener('load', () => resolve(fileReader.result));
     fileReader.addEventListener('error', reject);
+
+    return fileReader.readAsDataURL(file);
   });
 };
 class PictureForm extends React.Component {
@@ -48,11 +50,8 @@ class PictureForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.onComplete(this.state);
-    this.setState(this.emptyState);
-
+    // this.setState(this.emptyState);
   }
-
-
   // life cycle hooks------------
   render() {
     return (
@@ -64,7 +63,7 @@ class PictureForm extends React.Component {
       <label>Picture</label>
       <input 
         type='file'
-        name='photo'
+        name='picture'
         onChange={this.handleChange}
       />
       <label>Description</label>
