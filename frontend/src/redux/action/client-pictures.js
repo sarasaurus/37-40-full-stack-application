@@ -18,10 +18,13 @@ const create = picture => ({
 const createRequest = picture => (store) => {
   const { token } = store.getState();
   const parsedToken = JSON.parse(token);
+  console.log('PICTURE ROUTE: token', { token });
+  console.log('PICTURE ROUTE: Parsed Token', parsedToken);
+  console.log('PICTURE ROUTE: picture', picture);
   return superagent.post(`${API_URL}${routes.PHOTOS_ROUTE}`)
-    .set('Authorization', `Bearer ${parsedToken.token}`)
+    .set('Authorization', `Bearer ${parsedToken.token}`) // I think i need to see what the backend is getting here
     .field('description', picture.description)
-    .attach('photo', picture.photo)
+    .attach('photo', picture.picture)
     .then((response) => {
       return store.dispatch(create(response.body));
     });

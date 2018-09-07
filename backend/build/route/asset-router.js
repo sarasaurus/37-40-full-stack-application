@@ -40,6 +40,8 @@ var multerUpload = (0, _multer2.default)({ dest: __dirname + '/../temp' });
 var assetRouter = new _express.Router();
 
 assetRouter.post('/assets', _bearerAuthMiddleware2.default, multerUpload.any(), function (request, response, next) {
+  console.log('REQUEST OBJECT BODY PROPERTY', request.body);
+  console.log('REQUEST OBJECT FILES PROPERTY', request.files);
   if (!request.account) {
     return next(new _httpErrors2.default(404, 'ASSET ROUTER ERROR: asset not found, no account! '));
   }

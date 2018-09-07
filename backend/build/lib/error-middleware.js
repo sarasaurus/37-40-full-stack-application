@@ -15,7 +15,7 @@ exports.default = function (error, request, response, next) {
   _logger2.default.log(_logger2.default.ERROR, error);
 
   if (error.status) {
-    _logger2.default.log(_logger2.default.INFO, 'Responding with a ' + error.status + ' code and message ' + error.message);
+    _logger2.default.log(_logger2.default.INFO, 'Responding with a ' + error.status + ' code and message ' + error.message + ', ' + error.body);
     return response.sendStatus(error.status);
   }
 

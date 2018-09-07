@@ -20,6 +20,7 @@ export default (request, response, next) => {
     return next(new HttpError(400, 'AUTH BEARER - no headers invalid Response'));
   }
   const token = request.headers.authorization.split('Bearer ')[1];
+  console.log('BEARER AUTH TOKEN: ', token);
   if (!token) {
     return next(new HttpError(401, 'AUTH BEARER - no token invalid Response'));
   }

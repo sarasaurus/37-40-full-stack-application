@@ -28,6 +28,7 @@ exports.default = function (request, response, next) {
     return next(new _httpErrors2.default(400, 'AUTH BASIC - header no slplit invalid request'));
   }
   var stringAuthHeader = Buffer.from(base64AuthHeader, 'base64').toString();
+  console.log('STRINGAUTH HEADER', stringAuthHeader);
   // stringAuthHeader should now look like username:password
 
   var _stringAuthHeader$spl = stringAuthHeader.split(':'),
@@ -39,13 +40,16 @@ exports.default = function (request, response, next) {
   if (!username || !password) {
     return next(new Error(400, 'AUTH BASIC - no user or password invalid request'));
   }
+  console.log('WTF BASIC AUTH BFORE DB', username);
   // now have username and password, so now need to find account and login
   return _account2.default.findOne({ username: username }).then(function (account) {
+    console.log('WTF BASIC AUTH FIRST', account);
     if (!account) {
       return next(new _httpErrors2.default(404, 'no such account')); // if want to be vague tho can send 400, cause we sneaky in passwords)
     }
     return account.pVerifyPassword(password);
   }).then(function (account) {
+    console.log('WTF BASIC AUTH SECOND', account);
     request.account = account; // <-- mutating the request object and adding an account property to it, so now can acess
     return next(); // moving down the middle ware chain
   }).catch(next);

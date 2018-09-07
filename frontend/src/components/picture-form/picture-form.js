@@ -19,9 +19,9 @@ class PictureForm extends React.Component {
   constructor(props) {
     super(props);
     this.emptyState = {
-      preview: undefined, 
-      picture: '', 
-      description: '',
+      preview: undefined, // base64 representation
+      picture: '', // URL or path
+      description: '', // empty string
     };
     this.state = this.emptyState;
     autoBind.call(this, PictureForm);
@@ -29,15 +29,16 @@ class PictureForm extends React.Component {
   
   // member funcs----------
   handleChange(event) {
+    // destructuring these key/value pairs from the event
     const { type, value, files } = event.target; 
     if (type === 'file') {
       // this is async
       fileToBase64String(files[0])
         .then(result => this.setState({ preview: result })); 
-      this.setState({
+      this.setState({ // may also be async
         picture: files[0],
       }, () => {
-        console.log('i will fire only after the state changes');
+        console.log('i will fire only after the state changes'); // this is where you would put anything you want to only happen after the state changes
       });
     } else {
       this.setState({
@@ -50,7 +51,7 @@ class PictureForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.onComplete(this.state);
-    // this.setState(this.emptyState);
+    this.setState(this.emptyState);
   }
   // life cycle hooks------------
   render() {
@@ -63,7 +64,7 @@ class PictureForm extends React.Component {
       <label>Picture</label>
       <input 
         type='file'
-        name='picture'
+        name='photo'
         onChange={this.handleChange}
       />
       <label>Description</label>

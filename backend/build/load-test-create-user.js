@@ -10,8 +10,10 @@ loadTestUser.create = function (userContext, event, done) {
 
   userContext.vars.bio = faker.lorem.words(10);
   userContext.vars.avatar = faker.image.imageUrl();
-  userContext.vars.firstName = faker.lorem.username();
-  userContext.vars.lastName = faker.lorem.username();
+  userContext.vars.firstName = faker.name.firstName();
+  userContext.vars.lastName = faker.name.lastName();
+
+  return done();
 };
 
 // in oldschool es5 functions, when we doing async, we often have to call done, indicate we done

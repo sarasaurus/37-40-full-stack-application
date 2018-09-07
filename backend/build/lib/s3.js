@@ -17,20 +17,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // this is weird but needed to get mock environment to work
 
 var s3Upload = function s3Upload(path, key) {
-  var AWS = require('aws-sdk'); // class
-  var amazonS3 = new AWS.S3(); // insantiation of the class
+  var AWS = require('aws-sdk');
+  var amazonS3 = new AWS.S3();
 
   var uploadOptions = {
     Bucket: process.env.AWS_BUCKET,
     Key: key,
     ACL: 'public-read',
-    Body: _fsExtra2.default.createReadStream(path) // the readable stream is like our bodyparser += taking the chunks of data sent via http and parsing them into a readable stream-- whole
+    Body: _fsExtra2.default.createReadStream(path)
   };
-  // .promise() this calls the internal callback of the .upload method -- vanilla aws methods are all node style err first callbacks, being err/data-- this is saying if data-- .then if err .catch, IE when you add .promise() you are basically promisifying their methods, you could make your own function to do this, you could use bluebird whatever.
+
   return amazonS3.upload(uploadOptions).promise().then(function (response) {
     // console.log('S3 RESPONSE: ', response);
     return _fsExtra2.default.remove(path).then(function () {
-      // this response is from .then on 23, it chains off of 25, but we no want that return so skip the () part
       return response.Location;
     }).catch(function (err) {
       return Promise.reject(err);

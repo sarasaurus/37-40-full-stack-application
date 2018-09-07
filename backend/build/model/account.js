@@ -62,20 +62,15 @@ var accountSchema = _mongoose2.default.Schema({
 function pVerifyPassword(password) {
   var _this = this;
 
-  // basically need to run same hash on it
-  // bcrypt method to compare two hashes
-  // important to note we never compare password to old password-- just to password HASH!
   return _bcrypt2.default.compare(password, this.passwordHash).then(function (result) {
     if (!result) {
       throw new Error('400', 'sneaky sneaky password error AUTH - incorrect data');
-      // error should be 401-- but beause this is password, error is sekret coded
     }
-    return _this; // means to return the account
+    return _this;
   });
 }
 
 function pCreateToken() {
-  // ES5 funciton so this is scoped to the request object, not the schema object
   this.tokenSeed = _crypto2.default.randomBytes(TOKEN_SEED_LENGTH).toString('hex');
   return this.save().then(function (account) {
     return _jsonwebtoken2.default.sign({ tokenSeed: account.tokenSeed }, process.env.SOUND_CLOUD_SECRET);
@@ -101,5 +96,3 @@ Account.create = function (username, email, password) {
 };
 
 exports.default = Account;
-
-// we are linking our tokens to the password, but could create separte tokens for diff users then create bearer-user-auth mmiddleware to handle those diff permisionsß

@@ -27,7 +27,6 @@ var assetSchema = _mongoose2.default.Schema({
   },
   account: {
     type: _mongoose2.default.Schema.Types.ObjectId,
-    // schema.types is just more verboase version of provious version so we thinkg
     required: true
   }
 });

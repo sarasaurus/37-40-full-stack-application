@@ -12,21 +12,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var profileSchema = _mongoose2.default.Schema({
   firstName: {
-    type: String,
-    required: true
+    type: String
+    // required: true, 
   },
   lastName: {
-    type: String,
-    required: true
+    type: String
+    // required: true,
   },
   bio: { type: String },
   avatar: { type: String },
   account: {
     type: _mongoose2.default.Schema.ObjectId,
-    // do you need an account to have a profile? if yes then true
     required: true,
     unique: true
-    // can accounts have more than one profile? if noo then true
   }
 });
 

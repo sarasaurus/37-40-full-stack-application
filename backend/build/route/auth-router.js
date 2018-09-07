@@ -35,19 +35,23 @@ authRouter.post('/signup', jsonParser, function (request, response, next) {
   // const options = { runValidators: true, new: true };
   return _account2.default.create(request.body.username, request.body.email, request.body.password).then(function (account) {
     delete request.body.password;
-    _logger2.default.log(_logger2.default.INFO, 'AUTH - creating TOKEN');
+    _logger2.default.log(_logger2.default.INFO, 'the ACCOUNT IN SIGNUP ' + account);
     return account.pCreateToken();
   }).then(function (token) {
     _logger2.default.log(_logger2.default.INFO, 'AUTH - returning a 200 code and a token');
+    response.cookie('X-Auth-Token', token, { maxAge: 900000 });
     return response.json({ token: token });
   }).catch(next);
 });
+
 authRouter.get('/login', _basicAuthMiddleware2.default, function (request, response, next) {
   if (!request.account) {
     return next(new _httpErrors2.default(404, 'AUTH - no resource, now in auth-router'));
   }
+  _logger2.default.log(_logger2.default.INFO, 'the ACCOUNT IN LOGIN ' + request.account);
   return request.account.pCreateToken().then(function (token) {
     _logger2.default.log(_logger2.default.INFO, 'LOGIN - AuthRouter responding with a 200 status and a Token');
+    response.cookie('X-Auth-Token', token, { maxAge: 900000 });
     return response.json({ token: token });
   }).catch(next);
 });
