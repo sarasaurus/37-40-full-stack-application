@@ -45,7 +45,7 @@ assetRouter.post('/assets', _bearerAuthMiddleware2.default, multerUpload.any(), 
   if (!request.account) {
     return next(new _httpErrors2.default(404, 'ASSET ROUTER ERROR: asset not found, no account! '));
   }
-  if (!request.body.title || request.files.length > 1 || request.files[0].fieldname !== 'asset') {
+  if (!request.body.description || request.files.length > 1 || request.files[0].fieldname !== 'photo') {
     return next(new _httpErrors2.default(400, 'ASSET ROUTER ERROR: invalid request'));
   }
 
