@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 const assetSchema = mongoose.Schema({
   title: { 
     type: String,
-    required: true, 
   },
   url: { 
     type: String,

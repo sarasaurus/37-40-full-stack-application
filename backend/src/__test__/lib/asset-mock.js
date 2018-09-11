@@ -10,9 +10,9 @@ const pCreateAssetMock = () => {
   return pCreateAccountMock()
     .then((mockAcct) => {
       resultMock.accountMock = mockAcct;
-
+      console.log('IN ASSET MOCK');
       return new Asset({
-        title: faker.lorem.words(5),
+        description: faker.lorem.words(5),
         url: faker.random.image(),
         account: resultMock.accountMock.account._id, 
       }).save();

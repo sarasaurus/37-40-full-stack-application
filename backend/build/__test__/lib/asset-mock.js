@@ -22,9 +22,9 @@ var pCreateAssetMock = function pCreateAssetMock() {
 
   return (0, _accountMock.pCreateAccountMock)().then(function (mockAcct) {
     resultMock.accountMock = mockAcct;
-
+    console.log('IN ASSET MOCK');
     return new _asset2.default({
-      title: _faker2.default.lorem.words(5),
+      description: _faker2.default.lorem.words(5),
       url: _faker2.default.random.image(),
       account: resultMock.accountMock.account._id
     }).save();

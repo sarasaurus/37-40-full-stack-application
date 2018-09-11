@@ -28,7 +28,7 @@ var s3Upload = function s3Upload(path, key) {
   };
 
   return amazonS3.upload(uploadOptions).promise().then(function (response) {
-    // console.log('S3 RESPONSE: ', response);
+    console.log('S3 RESPONSE: ', response);
     return _fsExtra2.default.remove(path).then(function () {
       return response.Location;
     }).catch(function (err) {

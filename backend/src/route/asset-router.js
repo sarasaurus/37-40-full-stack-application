@@ -19,9 +19,9 @@ assetRouter.post('/assets', bearerAuthMiddleware, multerUpload.any(), (request, 
   if (!request.account) {
     return next(new HttpError(404, 'ASSET ROUTER ERROR: asset not found, no account! '));
   }
-  if (!request.body.description || request.files.length > 1 || request.files[0].fieldname !== 'photo') {
-    return next(new HttpError(400, 'ASSET ROUTER ERROR: invalid request'));
-  }
+  // if (!request.body.description || request.files.length > 1 || request.files[0].fieldname !== 'photo') {
+  //   return next(new HttpError(400, 'ASSET ROUTER ERROR: invalid request'));
+  // }
   const [file] = request.files;
   const key = `${file.filename}.${file.originalname}`;
 
@@ -32,7 +32,10 @@ assetRouter.post('/assets', bearerAuthMiddleware, multerUpload.any(), (request, 
         account: request.account._id,
         url,
       }).save()
-        .then(asset => response.json(asset))
+        .then((asset) => {
+          // console.log('AWS response', response.json(asset));
+          response.json(asset);
+        })
         .catch((err) => {
           return next;
         });

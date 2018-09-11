@@ -12,8 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var assetSchema = _mongoose2.default.Schema({
   title: {
-    type: String,
-    required: true
+    type: String
   },
   url: {
     type: String,
